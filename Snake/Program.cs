@@ -12,6 +12,9 @@ namespace Snake
 		{
 			Console.OutputEncoding = Encoding.UTF8;
 
+            Console.Write("Enter your name: ");
+			string name = Console.ReadLine();
+
 			Console.SetWindowSize(75, 25);
 
 			Walls walls = new Walls(62, 25);
@@ -58,12 +61,12 @@ namespace Snake
 					snake.HandleKey(key.Key);
 				}
 			}
-			WriteGameOver();
+			WriteGameOver(name);
 			Console.ReadLine();
 		}
 
 
-		static void WriteGameOver()
+		static void WriteGameOver(string name)
 		{
 			int xOffset = 15;
 			int yOffset = 8;
@@ -72,10 +75,11 @@ namespace Snake
 			WriteText("-----------------------------", xOffset, yOffset++);
 			WriteText("И Г Р А    О К О Н Ч Е Н А", xOffset + 1, yOffset++);
 			yOffset++;
-			WriteText("Autor: Artem Stryzhakov", xOffset + 2, yOffset++);
-			WriteText("Special for Marina Oleinik.", xOffset + 1, yOffset++);
+			WriteText($"{name}, you have lost.",xOffset + 1, yOffset++);
 			WriteText("-----------------------------", xOffset, yOffset++);
 			WriteText("( ͡° ͜ʖ ͡°)", xOffset + 9, yOffset++);
+
+
 		}
 
 		static void WriteText(String text, int xOffset, int yOffset)
