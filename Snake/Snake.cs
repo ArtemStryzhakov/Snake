@@ -24,13 +24,16 @@ namespace Snake
 
 		public void Move()
 		{
-			Point tail = pList.First();
-			pList.Remove(tail);
-			Point head = GetNextPoint();
-			pList.Add(head);
+			if (direction != Direction.PAUSE)
+			{
+				Point tail = pList.First();
+				pList.Remove(tail);
+				Point head = GetNextPoint();
+				pList.Add(head);
 
-			tail.Clear();
-			head.Draw();
+				tail.Clear();
+				head.Draw();
+			}
 		}
 
 		public Point GetNextPoint()
@@ -62,6 +65,8 @@ namespace Snake
 				direction = Direction.DOWN;
 			else if (key == ConsoleKey.UpArrow)
 				direction = Direction.UP;
+			else if (key == ConsoleKey.Spacebar)
+				direction = Direction.PAUSE;
 		}
 
 		public bool Eat(Point food)

@@ -12,20 +12,21 @@ namespace Snake
 		{
 			Console.OutputEncoding = Encoding.UTF8;
 
-			Console.SetWindowSize(80, 25);
+			Console.SetWindowSize(75, 25);
 
-			Walls walls = new Walls(80, 25);
+			Walls walls = new Walls(62, 25);
 			walls.Draw();
 
 			// Отрисовка точек			
-			Point p = new Point(4, 5, '*', ConsoleColor.Red);
+			Point p = new Point(4, 8, '*', ConsoleColor.Red);
 			Snake snake = new Snake(p, 4, Direction.RIGHT);
 			snake.Draw();
 
-			FoodCreator foodCreator = new FoodCreator(80, 25, '$', ConsoleColor.Green);
+			FoodCreator foodCreator = new FoodCreator(62, 25, '$', ConsoleColor.Green);
 			Point food = foodCreator.CreateFood();
 			food.Draw();
 			Score score = new Score(0, 1);//score-0, level-1
+			score.speed = 50;
 			score.ScoreWrite();
 
 			while (true)
@@ -64,7 +65,7 @@ namespace Snake
 
 		static void WriteGameOver()
 		{
-			int xOffset = 25;
+			int xOffset = 15;
 			int yOffset = 8;
 			Console.ForegroundColor = ConsoleColor.Red;
 			Console.SetCursorPosition(xOffset, yOffset++);
@@ -74,6 +75,7 @@ namespace Snake
 			WriteText("Autor: Artem Stryzhakov", xOffset + 2, yOffset++);
 			WriteText("Special for Marina Oleinik.", xOffset + 1, yOffset++);
 			WriteText("-----------------------------", xOffset, yOffset++);
+			WriteText("( ͡° ͜ʖ ͡°)", xOffset + 9, yOffset++);
 		}
 
 		static void WriteText(String text, int xOffset, int yOffset)
@@ -81,6 +83,5 @@ namespace Snake
 			Console.SetCursorPosition(xOffset, yOffset);
 			Console.WriteLine(text);
 		}
-
 	}
 }
